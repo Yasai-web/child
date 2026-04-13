@@ -6,81 +6,46 @@
 <title>子育ておでかけリンク集</title>
 
 <style>
-body {
-  font-family: sans-serif;
-  margin: 0;
-  background: #f6f7f9;
+body { margin:0; font-family:sans-serif; background:#f6f7f9; }
+
+header{
+  background:#ff8aa5; color:white;
+  padding:16px; text-align:center;
+  font-weight:bold;
 }
 
-/* ヘッダー */
-header {
-  background: #ff8aa5;
-  color: white;
-  padding: 16px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
+.tabs{
+  display:flex; overflow-x:auto;
+  background:white; border-bottom:1px solid #ddd;
 }
 
-/* タブ */
-.tabs {
-  display: flex;
-  overflow-x: auto;
-  background: white;
-  border-bottom: 1px solid #ddd;
+.tab{
+  padding:12px 14px; white-space:nowrap;
+  cursor:pointer; font-size:14px;
 }
 
-.tab {
-  padding: 12px 16px;
-  cursor: pointer;
-  white-space: nowrap;
-  font-size: 14px;
-  border-bottom: 3px solid transparent;
+.tab.active{
+  border-bottom:3px solid #ff8aa5;
+  font-weight:bold;
 }
 
-.tab.active {
-  border-bottom: 3px solid #ff8aa5;
-  font-weight: bold;
+.container{ display:none; padding:12px; }
+.container.active{ display:block; }
+
+.card{
+  background:white; border-radius:12px;
+  margin-bottom:12px; overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* コンテンツ */
-.container {
-  padding: 12px;
-  display: none;
+.card img{
+  width:100%; height:170px;
+  object-fit:cover;
 }
 
-.container.active {
-  display: block;
-}
-
-/* カード */
-.card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-}
-
-.card .content {
-  padding: 10px;
-}
-
-.card .title {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.card .desc {
-  font-size: 12px;
-  color: #555;
-}
+.content{ padding:10px; }
+.title{ font-weight:bold; }
+.desc{ font-size:12px; color:#555; }
 </style>
 </head>
 
@@ -88,176 +53,133 @@ header {
 
 <header>👶 子育ておでかけリンク集</header>
 
-<!-- タブ -->
 <div class="tabs">
-  <div class="tab active" onclick="showTab('care')">施設</div>
-  <div class="tab" onclick="showTab('play')">遊び場</div>
-  <div class="tab" onclick="showTab('park')">公園</div>
-  <div class="tab" onclick="showTab('museum')">博物館</div>
-  <div class="tab" onclick="showTab('other')">その他</div>
+  <div class="tab active" onclick="show('care')">施設</div>
+  <div class="tab" onclick="show('play')">遊び</div>
+  <div class="tab" onclick="show('park')">公園</div>
+  <div class="tab" onclick="show('museum')">博物館</div>
+  <div class="tab" onclick="show('other')">その他</div>
 </div>
 
 <!-- 施設 -->
 <div id="care" class="container active">
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?preschool" />
-    <div class="content">
-      <div class="title">たんぽぽ保育園</div>
-      <div class="desc">地域密着型の保育園</div>
-    </div>
-  </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?kids,playroom" />
-    <div class="content">
-      <div class="title">キッズルーム</div>
-      <div class="desc">雨の日でも遊べる室内空間</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?children,activity" />
-    <div class="content">
-      <div class="title">まちぷら</div>
-      <div class="desc">地域交流型スペース</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?child,play" />
-    <div class="content">
-      <div class="title">こばとくらぶ</div>
-      <div class="desc">幼児向けの遊び場</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?library,kids" />
-    <div class="content">
-      <div class="title">子育てひろば（西片・江戸川橋・汐見）</div>
-      <div class="desc">親子でゆっくりできる場所</div>
-    </div>
-  </div>
-</div>
-
-<!-- 遊び場 -->
-<div id="play" class="container">
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?zoo,panda" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Ueno_Zoo_entrance_gate.jpg">
     <div class="content">
       <div class="title">上野動物園</div>
-      <div class="desc">パンダが人気の定番スポット</div>
+      <div class="desc">パンダで有名な日本最古の動物園</div>
     </div>
   </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?aquarium,jellyfish" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Kodomo_Toshokan_International_Library_of_Children%27s_Literature.jpg">
+    <div class="content">
+      <div class="title">国際子ども図書館</div>
+      <div class="desc">歴史ある建物の子ども図書館</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 遊び -->
+<div id="play" class="container">
+
+  <div class="card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Tokyo_Skyline_from_Ueno_Park.jpg">
+    <div class="content">
+      <div class="title">上野公園</div>
+      <div class="desc">動物園・博物館が集まる大型公園</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Sumida_Aquarium_entrance.jpg">
     <div class="content">
       <div class="title">すみだ水族館</div>
-      <div class="desc">幻想的な水族館</div>
+      <div class="desc">スカイツリー内の人気水族館</div>
     </div>
   </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?toy,museum" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Tokyo_Toy_Museum.jpg">
     <div class="content">
       <div class="title">東京おもちゃ美術館</div>
-      <div class="desc">触って遊べる体験型施設</div>
+      <div class="desc">木のおもちゃで遊べる体験施設</div>
     </div>
   </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?firetruck,museum" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Tokyo_Fire_Museum.jpg">
     <div class="content">
       <div class="title">消防博物館</div>
-      <div class="desc">消防車や体験展示が人気</div>
+      <div class="desc">消防車・体験展示が人気</div>
     </div>
   </div>
+
 </div>
 
 <!-- 公園 -->
 <div id="park" class="container">
+
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?park,children" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Shinjuku_Gyoen_National_Garden_pond.jpg">
     <div class="content">
-      <div class="title">新花公園</div>
+      <div class="title">新宿御苑</div>
     </div>
   </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?playground" />
-    <div class="content">
-      <div class="title">切通公園</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?sakura,park" />
-    <div class="content">
-      <div class="title">墨田公園</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?ueno,park" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Ueno_Park_sakura.jpg">
     <div class="content">
       <div class="title">上野公園</div>
     </div>
   </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?garden,park" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Sumida_Park_Skytree.jpg">
     <div class="content">
-      <div class="title">新宿御苑</div>
+      <div class="title">墨田公園</div>
     </div>
   </div>
+
 </div>
 
 <!-- 博物館 -->
 <div id="museum" class="container">
+
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?museum,dinosaur" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/National_Museum_of_Nature_and_Science_Tokyo.jpg">
     <div class="content">
-      <div class="title">東京科学博物館</div>
+      <div class="title">国立科学博物館</div>
     </div>
   </div>
 
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?museum,japan" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Tokyo_National_Museum_Main_Building.jpg">
     <div class="content">
       <div class="title">東京国立博物館</div>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?library,children" />
-    <div class="content">
-      <div class="title">国際子ども図書館</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://source.unsplash.com/800x400/?library,books" />
-    <div class="content">
-      <div class="title">湯島図書館</div>
-    </div>
-  </div>
 </div>
 
 <!-- その他 -->
 <div id="other" class="container">
+
   <div class="card">
-    <img src="https://source.unsplash.com/800x400/?river,tokyo" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Kanda_River_Tokyo.jpg">
     <div class="content">
-      <div class="title">神田川深水テラス</div>
+      <div class="title">神田川・水辺エリア</div>
     </div>
   </div>
+
 </div>
 
 <script>
-function showTab(id){
-  document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+function show(id){
+  document.querySelectorAll('.container').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
 
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active');
