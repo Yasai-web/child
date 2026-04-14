@@ -1,188 +1,227 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>子育ておでかけリンク集</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>子育てリンク集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@700&display=swap" rel="stylesheet">
 <style>
-body { margin:0; font-family:sans-serif; background:#f6f7f9; }
-
-header{
-  background:#ff8aa5; color:white;
-  padding:16px; text-align:center;
-  font-weight:bold;
-}
-
-.tabs{
-  display:flex; overflow-x:auto;
-  background:white; border-bottom:1px solid #ddd;
-}
-
-.tab{
-  padding:12px 14px; white-space:nowrap;
-  cursor:pointer; font-size:14px;
-}
-
-.tab.active{
-  border-bottom:3px solid #ff8aa5;
-  font-weight:bold;
-}
-
-.container{ display:none; padding:12px; }
-.container.active{ display:block; }
-
-.card{
-  background:white; border-radius:12px;
-  margin-bottom:12px; overflow:hidden;
-  box-shadow:0 2px 6px rgba(0,0,0,0.08);
-}
-
-.card img{
-  width:100%; height:170px;
-  object-fit:cover;
-}
-
-.content{ padding:10px; }
-.title{ font-weight:bold; }
-.desc{ font-size:12px; color:#555; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#f7f6f2;font-family:'Noto Sans JP',sans-serif;color:#222;}
+.wrap{padding:2rem 1.5rem;max-width:1080px;margin:0 auto;}
+.top{text-align:center;margin-bottom:2rem;}
+.top h1{font-family:'M PLUS Rounded 1c',sans-serif;font-size:28px;font-weight:700;letter-spacing:0.03em;color:#222;}
+.top p{color:#777;font-size:13px;margin-top:6px;}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
+.tab{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid;background:transparent;transition:all 0.15s;font-family:'Noto Sans JP',sans-serif;}
+.t-all{border-color:#888;color:#888;}
+.t-all.on,.t-all:hover{background:#888;color:#fff;}
+.t-care{border-color:#1D9E75;color:#1D9E75;}
+.t-care.on,.t-care:hover{background:#1D9E75;color:#fff;}
+.t-animal{border-color:#BA7517;color:#BA7517;}
+.t-animal.on,.t-animal:hover{background:#BA7517;color:#fff;}
+.t-museum{border-color:#378ADD;color:#378ADD;}
+.t-museum.on,.t-museum:hover{background:#378ADD;color:#fff;}
+.t-park{border-color:#639922;color:#639922;}
+.t-park.on,.t-park:hover{background:#639922;color:#fff;}
+.t-play{border-color:#993556;color:#993556;}
+.t-play.on,.t-play:hover{background:#993556;color:#fff;}
+.sec{margin-bottom:2.5rem;}
+.sec-h{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid;}
+.sec-h span{font-family:'M PLUS Rounded 1c',sans-serif;font-size:18px;font-weight:700;}
+.sec-care .sec-h{border-color:#1D9E75;color:#1D9E75;}
+.sec-animal .sec-h{border-color:#BA7517;color:#BA7517;}
+.sec-museum .sec-h{border-color:#378ADD;color:#378ADD;}
+.sec-park .sec-h{border-color:#639922;color:#639922;}
+.sec-play .sec-h{border-color:#993556;color:#993556;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;}
+.card{background:#fff;border:1px solid #e8e6df;border-radius:14px;overflow:hidden;text-decoration:none;display:block;transition:transform 0.18s,box-shadow 0.18s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 8px 24px rgba(0,0,0,0.1);}
+.card img{width:100%;height:115px;object-fit:cover;display:block;background:#f0ede4;}
+.card-b{padding:9px 11px 12px;}
+.bdg{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;margin-bottom:6px;}
+.b-care{background:#E1F5EE;color:#0F6E56;}
+.b-animal{background:#FAEEDA;color:#854F0B;}
+.b-museum{background:#E6F1FB;color:#185FA5;}
+.b-park{background:#EAF3DE;color:#3B6D11;}
+.b-play{background:#FBEAF0;color:#72243E;}
+.card-name{font-size:12.5px;font-weight:500;color:#222;line-height:1.45;}
+.card-sub{font-size:10.5px;color:#999;margin-top:3px;}
+.hidden{display:none!important;}
+footer{text-align:center;color:#bbb;font-size:11px;padding:2rem 0 1rem;}
 </style>
 </head>
-
 <body>
 
-<header>👶 子育ておでかけリンク集</header>
+<div class="wrap">
+  <div class="top">
+    <h1>🧒 子育てリンク集</h1>
+    <p>東京近辺の子育て施設・おでかけスポット</p>
+  </div>
 
-<div class="tabs">
-  <div class="tab active" onclick="show('care')">施設</div>
-  <div class="tab" onclick="show('play')">遊び</div>
-  <div class="tab" onclick="show('park')">公園</div>
-  <div class="tab" onclick="show('museum')">博物館</div>
-  <div class="tab" onclick="show('other')">その他</div>
-</div>
+  <div class="tabs">
+    <button class="tab t-all on" onclick="filter(this,'all')">すべて</button>
+    <button class="tab t-care" onclick="filter(this,'care')">保育・子育て</button>
+    <button class="tab t-animal" onclick="filter(this,'animal')">動物・自然</button>
+    <button class="tab t-museum" onclick="filter(this,'museum')">博物館・図書館</button>
+    <button class="tab t-park" onclick="filter(this,'park')">公園・広場</button>
+    <button class="tab t-play" onclick="filter(this,'play')">遊び場・体験</button>
+  </div>
 
-<!-- 施設 -->
-<div id="care" class="container active">
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Ueno_Zoo_entrance_gate.jpg">
-    <div class="content">
-      <div class="title">上野動物園</div>
-      <div class="desc">パンダで有名な日本最古の動物園</div>
+  <!-- 保育施設・子育てひろば -->
+  <div class="sec sec-care" data-cat="care">
+    <div class="sec-h"><span>🌸 保育施設・子育てひろば</span></div>
+    <div class="grid">
+      <a class="card" href="https://www.google.com/search?q=たんぽぽ保育園+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?w=340&h=230&fit=crop&auto=format" alt="たんぽぽ保育園">
+        <div class="card-b"><div class="bdg b-care">保育園</div><div class="card-name">たんぽぽ保育園</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=キッズルーム+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1587616211892-53da9b5ade53?w=340&h=230&fit=crop&auto=format" alt="キッズルーム">
+        <div class="card-b"><div class="bdg b-care">子育て</div><div class="card-name">キッズルーム</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=まちぷら+文京区+子育て" target="_blank">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=340&h=230&fit=crop&auto=format" alt="まちぷら">
+        <div class="card-b"><div class="bdg b-care">子育て</div><div class="card-name">まちぷら</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=こばとくらぶ+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=340&h=230&fit=crop&auto=format" alt="こばとくらぶ">
+        <div class="card-b"><div class="bdg b-care">子育て</div><div class="card-name">こばとくらぶ</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=湯島児童館+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1567057419565-4349c49d8a04?w=340&h=230&fit=crop&auto=format" alt="児童館 湯島">
+        <div class="card-b"><div class="bdg b-care">児童館</div><div class="card-name">児童館（湯島）</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=本郷児童館+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1567057419565-4349c49d8a04?w=340&h=230&fit=crop&auto=format" alt="児童館 本郷">
+        <div class="card-b"><div class="bdg b-care">児童館</div><div class="card-name">児童館（本郷）</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=千駄木児童館+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1567057419565-4349c49d8a04?w=340&h=230&fit=crop&auto=format" alt="児童館 千駄木">
+        <div class="card-b"><div class="bdg b-care">児童館</div><div class="card-name">児童館（千駄木）</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=西片子育てひろば+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=340&h=230&fit=crop&auto=format" alt="子育てひろば 西片">
+        <div class="card-b"><div class="bdg b-care">ひろば</div><div class="card-name">子育てひろば（西片）</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=江戸川橋子育てひろば" target="_blank">
+        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=340&h=230&fit=crop&auto=format" alt="子育てひろば 江戸川橋">
+        <div class="card-b"><div class="bdg b-care">ひろば</div><div class="card-name">子育てひろば（江戸川橋）</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=汐見子育てひろば+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=340&h=230&fit=crop&auto=format" alt="子育てひろば 汐見">
+        <div class="card-b"><div class="bdg b-care">ひろば</div><div class="card-name">子育てひろば（汐見）</div></div>
+      </a>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Kodomo_Toshokan_International_Library_of_Children%27s_Literature.jpg">
-    <div class="content">
-      <div class="title">国際子ども図書館</div>
-      <div class="desc">歴史ある建物の子ども図書館</div>
+  <!-- 動物・水族館 -->
+  <div class="sec sec-animal" data-cat="animal">
+    <div class="sec-h"><span>🦁 動物・水族館</span></div>
+    <div class="grid">
+      <a class="card" href="https://www.tokyo-zoo.net/zoo/ueno/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=340&h=230&fit=crop&auto=format" alt="上野動物園">
+        <div class="card-b"><div class="bdg b-animal">動物園</div><div class="card-name">上野動物園</div><div class="card-sub">台東区上野公園</div></div>
+      </a>
+      <a class="card" href="https://www.sumida-aquarium.com/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=340&h=230&fit=crop&auto=format" alt="すみだ水族館">
+        <div class="card-b"><div class="bdg b-animal">水族館</div><div class="card-name">すみだ水族館</div><div class="card-sub">スカイツリータウン</div></div>
+      </a>
     </div>
   </div>
 
-</div>
-
-<!-- 遊び -->
-<div id="play" class="container">
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Tokyo_Skyline_from_Ueno_Park.jpg">
-    <div class="content">
-      <div class="title">上野公園</div>
-      <div class="desc">動物園・博物館が集まる大型公園</div>
+  <!-- 博物館・図書館 -->
+  <div class="sec sec-museum" data-cat="museum">
+    <div class="sec-h"><span>🔬 博物館・図書館</span></div>
+    <div class="grid">
+      <a class="card" href="https://www.kahaku.go.jp/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1532094349884-543559373b37?w=340&h=230&fit=crop&auto=format" alt="東京科学博物館">
+        <div class="card-b"><div class="bdg b-museum">博物館</div><div class="card-name">東京科学博物館</div><div class="card-sub">上野公園</div></div>
+      </a>
+      <a class="card" href="https://www.tnm.jp/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=340&h=230&fit=crop&auto=format" alt="東京国立博物館">
+        <div class="card-b"><div class="bdg b-museum">博物館</div><div class="card-name">東京国立博物館</div><div class="card-sub">上野公園</div></div>
+      </a>
+      <a class="card" href="https://www.kodomo.go.jp/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=340&h=230&fit=crop&auto=format" alt="国際子ども図書館">
+        <div class="card-b"><div class="bdg b-museum">図書館</div><div class="card-name">国際子ども図書館</div><div class="card-sub">上野公園内</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=湯島図書館+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=340&h=230&fit=crop&auto=format" alt="湯島図書館">
+        <div class="card-b"><div class="bdg b-museum">図書館</div><div class="card-name">湯島図書館</div><div class="card-sub">文京区</div></div>
+      </a>
+      <a class="card" href="https://www.tfd.metro.tokyo.lg.jp/inf/museum/index.html" target="_blank">
+        <img src="https://images.unsplash.com/photo-1541447271487-aabcf6c0d0fa?w=340&h=230&fit=crop&auto=format" alt="消防博物館">
+        <div class="card-b"><div class="bdg b-museum">博物館</div><div class="card-name">消防博物館</div><div class="card-sub">四谷</div></div>
+      </a>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Sumida_Aquarium_entrance.jpg">
-    <div class="content">
-      <div class="title">すみだ水族館</div>
-      <div class="desc">スカイツリー内の人気水族館</div>
+  <!-- 公園・広場 -->
+  <div class="sec sec-park" data-cat="park">
+    <div class="sec-h"><span>🌳 公園・広場</span></div>
+    <div class="grid">
+      <a class="card" href="https://www.kensetsu.metro.tokyo.lg.jp/jimusho/toubuk/ueno/index_top.html" target="_blank">
+        <img src="https://images.unsplash.com/photo-1490761668535-35497054278e?w=340&h=230&fit=crop&auto=format" alt="上野公園">
+        <div class="card-b"><div class="bdg b-park">公園</div><div class="card-name">上野公園</div><div class="card-sub">台東区</div></div>
+      </a>
+      <a class="card" href="https://www.env.go.jp/garden/shinjukugyoen/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?w=340&h=230&fit=crop&auto=format" alt="新宿御苑">
+        <div class="card-b"><div class="bdg b-park">公園</div><div class="card-name">新宿御苑</div><div class="card-sub">新宿区</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=墨田公園+東京" target="_blank">
+        <img src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=340&h=230&fit=crop&auto=format" alt="墨田公園">
+        <div class="card-b"><div class="bdg b-park">公園</div><div class="card-name">墨田公園</div><div class="card-sub">墨田区</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=新花公園+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=340&h=230&fit=crop&auto=format" alt="新花公園">
+        <div class="card-b"><div class="bdg b-park">公園</div><div class="card-name">新花公園</div><div class="card-sub">文京区</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=切通公園+文京区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=340&h=230&fit=crop&auto=format" alt="切通公園">
+        <div class="card-b"><div class="bdg b-park">公園</div><div class="card-name">切通公園</div><div class="card-sub">文京区</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=御徒町公園+台東区" target="_blank">
+        <img src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=340&h=230&fit=crop&auto=format" alt="御徒町公園">
+        <div class="card-b"><div class="bdg b-park">公園</div><div class="card-name">御徒町公園</div><div class="card-sub">台東区</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=神田川深水テラス+東京" target="_blank">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=340&h=230&fit=crop&auto=format" alt="神田川深水テラス">
+        <div class="card-b"><div class="bdg b-park">テラス</div><div class="card-name">神田川深水テラス</div><div class="card-sub">河川沿い</div></div>
+      </a>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Tokyo_Toy_Museum.jpg">
-    <div class="content">
-      <div class="title">東京おもちゃ美術館</div>
-      <div class="desc">木のおもちゃで遊べる体験施設</div>
+  <!-- 遊び場・体験 -->
+  <div class="sec sec-play" data-cat="play">
+    <div class="sec-h"><span>🎨 遊び場・体験</span></div>
+    <div class="grid">
+      <a class="card" href="https://goodtoy.org/ttm/" target="_blank">
+        <img src="https://images.unsplash.com/photo-1558050032-160f36233a07?w=340&h=230&fit=crop&auto=format" alt="東京おもちゃ美術館">
+        <div class="card-b"><div class="bdg b-play">体験</div><div class="card-name">東京おもちゃ美術館</div><div class="card-sub">新宿区</div></div>
+      </a>
+      <a class="card" href="https://www.google.com/search?q=としまキッズパーク+東京" target="_blank">
+        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=340&h=230&fit=crop&auto=format" alt="としまキッズパーク">
+        <div class="card-b"><div class="bdg b-play">遊び場</div><div class="card-name">としまキッズパーク</div><div class="card-sub">豊島区</div></div>
+      </a>
     </div>
   </div>
 
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Tokyo_Fire_Museum.jpg">
-    <div class="content">
-      <div class="title">消防博物館</div>
-      <div class="desc">消防車・体験展示が人気</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- 公園 -->
-<div id="park" class="container">
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Shinjuku_Gyoen_National_Garden_pond.jpg">
-    <div class="content">
-      <div class="title">新宿御苑</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Ueno_Park_sakura.jpg">
-    <div class="content">
-      <div class="title">上野公園</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Sumida_Park_Skytree.jpg">
-    <div class="content">
-      <div class="title">墨田公園</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- 博物館 -->
-<div id="museum" class="container">
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/National_Museum_of_Nature_and_Science_Tokyo.jpg">
-    <div class="content">
-      <div class="title">国立科学博物館</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Tokyo_National_Museum_Main_Building.jpg">
-    <div class="content">
-      <div class="title">東京国立博物館</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- その他 -->
-<div id="other" class="container">
-
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Kanda_River_Tokyo.jpg">
-    <div class="content">
-      <div class="title">神田川・水辺エリア</div>
-    </div>
-  </div>
-
+  <footer>各施設のリンク先は変更になる場合があります。最新情報は公式サイトにてご確認ください。</footer>
 </div>
 
 <script>
-function show(id){
-  document.querySelectorAll('.container').forEach(e=>e.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
-
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+function filter(btn, cat) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.sec').forEach(s => {
+    if (cat === 'all' || s.dataset.cat === cat) {
+      s.classList.remove('hidden');
+    } else {
+      s.classList.add('hidden');
+    }
+  });
 }
 </script>
 
